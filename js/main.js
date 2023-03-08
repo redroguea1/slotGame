@@ -24,43 +24,40 @@ document.querySelector("bottom").addEventListener("click", handleButton)
 /*----- functions -----*/
 init();
 
-
+// HERE HERE HERE **** HERE HERE HERE **** 
 function handleButton(evt) {
-    //not getting the property inside the button... 
-    console.log(evt.innerHTML)
-    //2 guards from missing the buttons and from Betting/Starting the game
-    if(evt.Target !== "BUTTON") return;
-    if(evt.Target.innerText == "BET") {
-        console.log("check")
-        rollSlots();
-    } else changeBet(evt); 
+    let btnClick = evt.target.innerText 
+    if(btnClick === "BET"){ rollSlots(); } 
+    else { changeBet(btnClick);}
 }
 
-function changeBet(evt) {
-    let betChange = evt.innerText;
-    console.log("we made it" + betChange);
+function changeBet(btnClick) {
+    btnClick = parseInt(btnClick)
     //should use the innerText of the button to adjust the betAmount CHECK
-    money.betAmount += betChange;
+    money.betAmount = money.betAmount+btnClick;
     if (money.betAmount <0) {money.betAmount = 0;}
+    if (money.playerBank < money.betAmount) {money.betAmount = money.playerBank;}
+    //needs to show the bet amount underneath bet. 
     render();
 }
 
 function rollSlots() {
     //should there be a guard right here for the 
+    console.log("slots will roll..."); //DELETE 
     money.playerBank = money.playerBank-money.betAmount
-    //quick guard for player account
-    if (money.playerBank <0) {money.playerBank = 0}
-    //assign 3 random values to my slot array
-    slots.forEach(element => {
+    // quick guard for player account
+    // if (money.playerBank <0) {money.playerBank = 0}
+    // assign 3 random values to my slot array
+    for (let i =0; i< slots.length; i++) {
+        console.log("we in the for loop!")
         const rndIdx = Math.floor(Math.random() * SLOT_VALS.length);
-        element = SLOT_VALS[rndIdx];
-        //DELETE 
-        slotResults();
-        console.log(slots);
-    });
+        console.log(rndIdx); //DELETE 
+        slots[i] = SLOT_VALS[rndIdx];
+    }
+    slotResults();
     //render those values MAYBE we set a delay
-    console.log("slots will roll...");
-    //call render()
+    console.log("slots will roll..."); //DELETE 
+    call render()
 }
 
 function slotResults() {
@@ -72,13 +69,19 @@ function slotResults() {
 }
 
 function getWinnings(sum){
-//if sum == WIN then pay out corresponding amount...
-if (sum === 0) {money.winnings = money.betAmount*1;}
-else if (sum === 3) {money.winnings = money.betAmount*3;}
-else if (sum === 15) {money.winnings = money.betAmount*5}
-else {money.winnings = 0}
+    //if sum == WIN then pay out corresponding amount...
+    if (sum === 0) {money.winnings = money.betAmount*1;}
+    else if (sum === 3) {money.winnings = money.betAmount*3;}
+    else if (sum === 15) {money.winnings = money.betAmount*5}
+    else {money.winnings = 0}
+    money.betAmount = 0;
+
+    //UPDATE WINNINGS HERE
+    
+    renderResults()
 }
-renderResults()
+//resets the bet amount. 
+
 
 function init() {
     money = {
@@ -98,15 +101,15 @@ function init() {
 
 function render() {
     //CONSOLE LOGS TO BE REMOVED
-    console.log(money);
-    console.log(slots);
+    // console.log(money);
+    // console.log(slots);
     s0resultEl.innerText = slots[0];
     s1resultEl.innerText = slots[1];
     s2resultEl.innerText = slots[2];
-
     //renders the last round metrics
     bankEl.innerText = money.playerBank;
     lastRndEl.innerText = money.winnings;
+    betEl.innerText = "BET";
     //need to write out the coding for changing
     renderResults(); //rendering the slot machine graphics after the player places a bet. 
 }
@@ -116,6 +119,5 @@ function renderResults() {
 //will need to be repeated for slot1 and slot2
     bankEl.innerText = money.playerBank;
     lastRndEl.innerText = money.winnings;
-    betEl 
-
+    betEl.innerText = bet.innerText + "\n " + money.betAmount;
 }
