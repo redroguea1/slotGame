@@ -15,7 +15,7 @@ const s1resultEl = document.getElementById("slot1");
 const s2resultEl = document.getElementById("slot2");
 const bankEl = document.getElementById("bank");
 const lastRndEl = document.getElementById("lastRnd");
-const betEl = document.getElementById("bet");
+const betEl = document.getElementById("betDisplay");
 
 
 /*----- event listeners -----*/
@@ -35,16 +35,16 @@ function changeBet(btnClick) {
     btnClick = parseInt(btnClick)
     //should use the innerText of the button to adjust the betAmount CHECK
     money.betAmount = money.betAmount+btnClick;
+    renderResults();
     if (money.betAmount <0) {money.betAmount = 0;}
     if (money.playerBank < money.betAmount) {money.betAmount = money.playerBank;}
-    //needs to show the bet amount underneath bet. 
-    render();
+    debugger
 }
 
 function rollSlots() {
     //should there be a guard right here for the 
     console.log("slots will roll..."); //DELETE 
-    money.playerBank = money.playerBank-money.betAmount
+    money.playerBank -= money.betAmount;
     // quick guard for player account
     // if (money.playerBank <0) {money.playerBank = 0}
     // assign 3 random values to my slot array
@@ -57,7 +57,7 @@ function rollSlots() {
     slotResults();
     //render those values MAYBE we set a delay
     console.log("slots will roll..."); //DELETE 
-    call render()
+    //call render()
 }
 
 function slotResults() {
@@ -77,7 +77,7 @@ function getWinnings(sum){
     money.betAmount = 0;
 
     //UPDATE WINNINGS HERE
-    
+
     renderResults()
 }
 //resets the bet amount. 
@@ -90,10 +90,7 @@ function init() {
         betAmount: 1,
         playerBank: 50
     }
-    slots = [
-        //try using the innerText property to assign the elemments
-        SLOT_VALS[0],SLOT_VALS[0],SLOT_VALS[0]
-    ];
+    slots = [SLOT_VALS[1],SLOT_VALS[0],SLOT_VALS[2]];
     render()
 }
 
@@ -106,18 +103,11 @@ function render() {
     s0resultEl.innerText = slots[0];
     s1resultEl.innerText = slots[1];
     s2resultEl.innerText = slots[2];
-    //renders the last round metrics
-    bankEl.innerText = money.playerBank;
-    lastRndEl.innerText = money.winnings;
-    betEl.innerText = "BET";
-    //need to write out the coding for changing
     renderResults(); //rendering the slot machine graphics after the player places a bet. 
 }
 
 function renderResults() {
-//slot0.src = IMAGE LOCATION will need to b
-//will need to be repeated for slot1 and slot2
     bankEl.innerText = money.playerBank;
     lastRndEl.innerText = money.winnings;
-    betEl.innerText = bet.innerText + "\n " + money.betAmount;
+    betEl.innerText = money.betAmount;
 }
