@@ -16,15 +16,20 @@ const s2resultEl = document.getElementById("slot2");
 const bankEl = document.getElementById("bank");
 const lastRndEl = document.getElementById("lastRnd");
 const betEl = document.getElementById("betDisplay");
+const iptEL = document.getElementById("funds");
 
 
 /*----- event listeners -----*/
 //RPS.Part4.3:12minutes DELETE
 document.querySelector("bottom").addEventListener("click", handleButton)
+
+//SHOULD MY LISTENER FUNCTION call my init function?? 
+document.querySelector("input").addEventListener("input", init)
 /*----- functions -----*/
 init();
 
 // HERE HERE HERE **** HERE HERE HERE **** 
+//updated maybe you need to check your winResults. 
 function handleButton(evt) {
     let btnClick = evt.target.innerText 
     if(btnClick === "BET"){ rollSlots(); } 
@@ -38,7 +43,7 @@ function changeBet(btnClick) {
     renderResults();
     if (money.betAmount <0) {money.betAmount = 0;}
     if (money.playerBank < money.betAmount) {money.betAmount = money.playerBank;}
-    debugger
+    
 }
 
 function rollSlots() {
@@ -54,6 +59,7 @@ function rollSlots() {
         console.log(rndIdx); //DELETE 
         slots[i] = SLOT_VALS[rndIdx];
     }
+    
     slotResults();
     //render those values MAYBE we set a delay
     console.log("slots will roll..."); //DELETE 
@@ -70,14 +76,11 @@ function slotResults() {
 
 function getWinnings(sum){
     //if sum == WIN then pay out corresponding amount...
-    if (sum === 0) {money.winnings = money.betAmount*1;}
-    else if (sum === 3) {money.winnings = money.betAmount*3;}
-    else if (sum === 15) {money.winnings = money.betAmount*5}
-    else {money.winnings = 0}
-    money.betAmount = 0;
-
+    if (sum === 0) {money.winnings = money.betAmount*100;
+    } else if (sum === 3) {money.winnings = money.betAmount*3;
+    } else if (sum === 15) {money.winnings = money.betAmount*5;
+    } else {money.winnings = 0;}
     //UPDATE WINNINGS HERE
-
     renderResults()
 }
 //resets the bet amount. 
@@ -88,7 +91,10 @@ function init() {
         //will need to be reset to 0
         winnings: 0,
         betAmount: 1,
-        playerBank: 50
+
+
+        //HERE** grabbing inner text of input and assigning it to the 
+        playerBank: iptEL.innerText
     }
     slots = [SLOT_VALS[1],SLOT_VALS[0],SLOT_VALS[2]];
     render()
