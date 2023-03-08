@@ -21,8 +21,6 @@ const resetEL = document.querySelector("span");
 /*----- event listeners -----*/
 document.querySelector("bottom").addEventListener("click", handleButton)
 
-//SHOULD/can MY LISTENER FUNCTION call my init function?? 
-//document.querySelector("input").addEventListener("input", render)
 /*----- functions -----*/
 init();
 
@@ -46,16 +44,15 @@ function changeBet(btnClick) {
 }
 
 function rollSlots() {
-    //should there be a guard right here for the 
-    console.log("slots will roll..."); //DELETE 
     money.playerBank -= money.betAmount;
+
     // quick guard for player account
     // if (money.playerBank <0) {money.playerBank = 0}
+
+
     // assign 3 random values to my slot array
     for (let i =0; i< slots.length; i++) {
-        console.log("we in the for loop!")
         const rndIdx = Math.floor(Math.random() * SLOT_VALS.length);
-        console.log(rndIdx); //DELETE 
         slots[i] = SLOT_VALS[rndIdx];
     }
     
@@ -82,18 +79,15 @@ function getWinnings(sum){
     } else {money.winnings = 0;}
     money.playerBank += money.winnings;
     renderResults();
-    renderResetBtn();
+    if (resetEL.style.visibility !== "visible") {renderResetBtn()};
 }
 
 
 function init() {
     money = {
-        //will need to be reset to 0
         winnings: 0,
         betAmount: 0,
-        //HERE** grabbing inner text of input and assigning it to the 
-        playerBank: 500
-        //actual code //window.prompt("please enter bet:")
+        playerBank: window.prompt("Welcome, insert funds to start....")
     }
     slots = [SLOT_VALS[1],SLOT_VALS[0],SLOT_VALS[2]];
     resetEL.style.visibility = "hidden";
@@ -101,10 +95,8 @@ function init() {
 }
 
 function cashReset() {
-    alert("we are in the cashReset");
-    window.prompt("Here are your winnings!: " + money.playerBank)
-    //call init() to reinitialize
-    //call render()
+    window.alert("Here are your winnings!: " + money.playerBank)
+    setTimeout(init(), 100000)
 }
 
 function renderResetBtn() {
