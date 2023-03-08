@@ -1,8 +1,5 @@
 /*----- constants -----*/
 const SLOT_VALS = [0, 1, 5]
-//above needs to beupdated like in RPS.P3/14min mark to make 
-
-
 
 /*----- app's state (variables) -----*/
 let money; //object with winnings = balance+amounts won, betAm  
@@ -16,24 +13,26 @@ const s2resultEl = document.getElementById("slot2");
 const bankEl = document.getElementById("bank");
 const lastRndEl = document.getElementById("lastRnd");
 const betEl = document.getElementById("betDisplay");
-const iptEL = document.getElementById("funds");
+
+//input element can be removed at this time. 
+const resetEL = document.querySelector("span"); 
 
 
 /*----- event listeners -----*/
-//RPS.Part4.3:12minutes DELETE
 document.querySelector("bottom").addEventListener("click", handleButton)
 
-//SHOULD MY LISTENER FUNCTION call my init function?? 
-document.querySelector("input").addEventListener("input", init)
+//SHOULD/can MY LISTENER FUNCTION call my init function?? 
+//document.querySelector("input").addEventListener("input", render)
 /*----- functions -----*/
 init();
 
-// HERE HERE HERE **** HERE HERE HERE **** 
-//updated maybe you need to check your winResults. 
+
 function handleButton(evt) {
     let btnClick = evt.target.innerText 
-    if(btnClick === "BET"){ rollSlots(); } 
-    else { changeBet(btnClick);}
+    if(btnClick === "BET"){ rollSlots(); 
+    } else if (btnClick === "RESET" && resetEL.style.visibility === "visible") {
+        cashReset();
+    } else {changeBet(btnClick);}
 }
 
 function changeBet(btnClick) {
@@ -69,8 +68,9 @@ function rollSlots() {
 function slotResults() {
     // DELETE... will sum always equal 0?? 
     let sum = null;
-    slots.forEach(element => sum+=element)
-    getWinnings(sum)
+    slots.forEach(element => sum+=element);
+    // debugger
+    getWinnings(sum);
     render();
 }
 
@@ -80,27 +80,39 @@ function getWinnings(sum){
     } else if (sum === 3) {money.winnings = money.betAmount*3;
     } else if (sum === 15) {money.winnings = money.betAmount*5;
     } else {money.winnings = 0;}
-    //UPDATE WINNINGS HERE
-    renderResults()
+    money.playerBank += money.winnings;
+    renderResults();
+    renderResetBtn();
 }
-//resets the bet amount. 
 
 
 function init() {
     money = {
         //will need to be reset to 0
         winnings: 0,
-        betAmount: 1,
-
-
+        betAmount: 0,
         //HERE** grabbing inner text of input and assigning it to the 
-        playerBank: iptEL.innerText
+        playerBank: 500
+        //actual code //window.prompt("please enter bet:")
     }
     slots = [SLOT_VALS[1],SLOT_VALS[0],SLOT_VALS[2]];
-    render()
+    resetEL.style.visibility = "hidden";
+    render();
 }
 
+function cashReset() {
+    alert("we are in the cashReset");
+    window.prompt("Here are your winnings!: " + money.playerBank)
+    //call init() to reinitialize
+    //call render()
+}
 
+function renderResetBtn() {
+    //toggles reset
+    if (resetEL.style.visibility === "visible") {
+        resetEL.style.visibility = "hidden";
+    } else resetEL.style.visibility = "visible";
+}
 
 function render() {
     //CONSOLE LOGS TO BE REMOVED
