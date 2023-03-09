@@ -12,23 +12,25 @@
 <body>
 <h1>SLOT ATTACK</h1>
   <!-- top displays the state of money STILL WRONG-->
+  
   <top>
     <!-- HERE* ADDING INPUT FIELD FOR FUNDS *HERE -->
-    <h2>BANK</h2>
-    <!-- <input id="funds"></input> -->
-    <h2 id="betDisplay"></h2>
-    <h2>winnings</h2>
-    <sub>
-      <h4 id="bank">bankAmount</h4>
-      <h4 id="lastRnd">LastRnd</h4>
-    </sub>
-  </top>
+    <h2 id="header">BANK
+      <p id="bank">bankAmount</p>
+    </h2>
+    <h2 id="header"> winnings
+      <p id="lastRnd">LastRnd</p>
+    </h2>
+  </top> 
+    
+  <!-- might need to turn this into an list element -->
   <slots>
     <h3 id="slot0"></h3>
     <h3 id="slot1"></h3>
     <h3 id="slot2"></h3>
   </slots>
 
+<h2 id="betDisplay"></h2>
 <!-- would ideally like my side buttons to stack on top of each other -->
 <bottom>
   <button>-5</button>

@@ -27,7 +27,7 @@ init();
 
 function handleButton(evt) {
     let btnClick = evt.target.innerText 
-    if(btnClick === "BET"){ rollSlots(); 
+    if(btnClick === "BET" && money.betAmount > 0){ rollSlots(); 
     } else if (btnClick === "RESET" && resetEL.style.visibility === "visible") {
         cashReset();
     } else {changeBet(btnClick);}
@@ -38,8 +38,10 @@ function changeBet(btnClick) {
     //should use the innerText of the button to adjust the betAmount CHECK
     money.betAmount = money.betAmount+btnClick;
     renderResults();
-    if (money.betAmount <0) {money.betAmount = 0;}
-    if (money.playerBank < money.betAmount) {money.betAmount = money.playerBank;}
+    if (money.playerBank <=0) {
+        cashReset();
+    } else if (money.betAmount <0) {money.betAmount = 0;
+    } else if (money.playerBank < money.betAmount) {money.betAmount = money.playerBank;}
     
 }
 
@@ -47,7 +49,7 @@ function rollSlots() {
     money.playerBank -= money.betAmount;
 
     // quick guard for player account
-    // if (money.playerBank <0) {money.playerBank = 0}
+    if (money.playerBank <0) {money.playerBank = 0}
 
 
     // assign 3 random values to my slot array
@@ -87,7 +89,9 @@ function init() {
     money = {
         winnings: 0,
         betAmount: 0,
-        playerBank: window.prompt("Welcome, insert funds to start....")
+        //needs to be changed back
+        playerBank: 100,
+        //window.prompt("Welcome, insert funds to start....")
     }
     slots = [SLOT_VALS[1],SLOT_VALS[0],SLOT_VALS[2]];
     resetEL.style.visibility = "hidden";
@@ -107,9 +111,6 @@ function renderResetBtn() {
 }
 
 function render() {
-    //CONSOLE LOGS TO BE REMOVED
-    // console.log(money);
-    // console.log(slots);
     s0resultEl.innerText = slots[0];
     s1resultEl.innerText = slots[1];
     s2resultEl.innerText = slots[2];
