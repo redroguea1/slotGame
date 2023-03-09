@@ -1,8 +1,5 @@
 
 
-/* html, body {
-    display: grid;
-} */
 body {
     height: 100vh;
     background-color: dodgerblue;
@@ -23,7 +20,33 @@ h1 {
 p {
     display: flex;
     justify-content: space-evenly;
-    margin: auto;
+    margin: 1vh;
+    font-size: 150%;
+    border-bottom-color: black;
+}
+
+
+
+slots {
+    display: flex;
+    font-size: 500%;
+    flex-direction: row;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+h2 {
+    display: flex;
+    font-size: 4vh;
+    text-align: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+
+h3 {
+    margin: 3vh;
 }
 
 bottom {
@@ -33,32 +56,5 @@ bottom {
  
 button.span {
     visibility:hidden;
+    size: 0px;
 }
-
-slots {
-    display: flex;
-    grid-row: 4;
-    grid-column: 2;
-    font-size: 500%;
-    flex-direction: row;
-    align-content: center;
-    flex-wrap: wrap;
-    justify-content: center;
-    justify-content: space-evenly;
-}
-
-h2 {
-    display: flex;
-    font-size: 5vh;
-    text-align: center;
-    justify-content: space-evenly;
-    flex-direction: column;
-}
-
-
-h3 {
-    flex-direction: row;
-    grid-row-start: 3;
-    grid-column-start: 1;
-}
-
