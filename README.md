@@ -8,7 +8,7 @@ Technologies:
     HTML, CSS, JavaScript
 
 Getting Started:
-    LINK GOES HERE McKINLEY
+    https://redroguea1.github.io/slotGame/
 
 
 Planned Future Enhancement
