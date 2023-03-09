@@ -17,6 +17,7 @@ const resetEL = document.querySelector("span");
 
 /*----- event listeners -----*/
 document.querySelector("bottom").addEventListener("click", handleButton)
+document.querySelector("span").addEventListener("click", handleButton)
 
 /*----- functions -----*/
 init();

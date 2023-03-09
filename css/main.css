@@ -15,6 +15,9 @@ top {
 h1 {
     display: flex;
     justify-content: space-around;
+    font: lighter;
+    color:white;
+    font-optical-sizing: auto;
 }
 
 p {
@@ -23,17 +26,18 @@ p {
     margin: 1vh;
     font-size: 150%;
     border-bottom-color: black;
+    font-optical-sizing: auto;
 }
-
 
 
 slots {
     display: flex;
-    font-size: 500%;
+    font-size: 450%;
     flex-direction: row;
     align-content: center;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    font-optical-sizing: auto;
 }
 
 h2 {
@@ -42,6 +46,7 @@ h2 {
     text-align: center;
     justify-content: space-evenly;
     flex-direction: column;
+    font-optical-sizing: auto;
 }
 
 
@@ -53,8 +58,20 @@ bottom {
     display: flex;
     justify-content: space-evenly;
 }
- 
-button.span {
+button {
+    background-color: white;
+    border-color: white;
+    width: 7%;
+    height: 10%;
+    font-size: 130%;
+}
+
+span {
     visibility:hidden;
     size: 0px;
+    display: flex;
+    justify-content: space-evenly;
 }
+
+
+ 
