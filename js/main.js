@@ -89,7 +89,8 @@ function init() {
         winnings: 0,
         betAmount: 0,
         //you can modify the code here to change the game to be preloaded or not. 
-        playerBank: window.prompt("Welcome, insert funds to start....")
+        playerBank: 1000,
+        //window.prompt("Welcome, insert funds to start....")
     }
     slots = [SLOT_VALS[1],SLOT_VALS[0],SLOT_VALS[2]];
     resetEL.style.visibility = "hidden";

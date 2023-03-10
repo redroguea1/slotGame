@@ -4,7 +4,8 @@ Game Title:
 Screenshots: 
     [Start Screen](/img/bty-logo.png)
     [Betting] 
-    [Winning]
+    [Win1]
+    [Win2]
     [Reset]
 
 Technologies:
