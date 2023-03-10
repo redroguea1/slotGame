@@ -43,7 +43,6 @@ p {
     font-optical-sizing: auto;
 }
 
-
 slots {
     display: flex;
     font-size: 450%;
@@ -76,6 +75,7 @@ bottom {
     display: flex;
     justify-content: space-evenly;
 }
+
 button {
     background-color: white;
     border-color: yellow;
